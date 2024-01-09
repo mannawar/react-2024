@@ -3,25 +3,31 @@ import './App.css';
 import Axios from 'axios';
 
 function App() {
-  const[name, setName] = useState("");
-  const [detail, setDetail] = useState(null);
+  const [excuse, setExcuse] = useState("");
 
-  const fetchData = () => {
-    Axios.get(`https://api.agify.io/?name=${name}`).then((res) => {
-      setDetail(res.data);
+
+
+  const handleExcuse = (excuse) => {
+    Axios.get(`https://excuser-three.vercel.app/v1/excuse/${excuse}/`).then((res) => {
+      setExcuse(res.data[0].excuse);
       console.log(res.data);
     })
   }
+
   
   return (
     <>
       <div className='App'>
         "Allah is the only God!"
-        <input placeholder="type your name" onChange={((event) => setName(event.target.value))}/>
-        <button onClick={fetchData}>Predict Age</button>
-        <p>Name: {detail?.name}</p>
-        <p>Age: {detail?.age}</p>
-        <p>Count: {detail?.count}</p>
+        <div className='App'>
+          <h1>Create an excuse</h1>
+          <button onClick={() =>handleExcuse("party")}>Party</button>
+          <button onClick={() =>handleExcuse("family")}>Family</button>
+          <button onClick={() =>handleExcuse("office")}>Office</button>
+          <p>{excuse}</p>
+
+
+        </div>
       </div>
     </>
   );
