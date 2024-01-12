@@ -1,25 +1,18 @@
-import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
 import './App.css';
-import { Cat} from './pages/Cat';
+import { useCounter} from './hooks/useCounter';
 
 function App() {
-  const client = new QueryClient({
-    defaultOptions: {
-      queries: {
-        refetchOnWindowFocus: true
-      }
-    }
-  })
-
-
+  const {state, handleIncrement, handleDecrement, handleReset} = useCounter(0);
   return (
     <>
       <div className='App'>
         لا إله إلا الله محمد رسول الله
-        <QueryClientProvider client={client}>
-          <Cat />
-        </QueryClientProvider>
-
+        <div>
+          <button onClick={handleIncrement}>Increment</button>
+          <button onClick={handleDecrement}>Decrement</button>
+          <button onClick={handleReset}>Reset</button>
+          {state}
+        </div>
       </div>
     </>
   );
