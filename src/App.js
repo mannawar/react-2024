@@ -1,21 +1,30 @@
 import './App.css';
-import { useCounter} from './hooks/useCounter';
+import { Person} from './pages/Person';
+import {PropTypes} from 'prop-types'
 
 function App() {
-  const {state, handleIncrement, handleDecrement, handleReset} = useCounter(0);
   return (
     <>
       <div className='App'>
         لا إله إلا الله محمد رسول الله
-        <div>
-          <button onClick={handleIncrement}>Increment</button>
-          <button onClick={handleDecrement}>Decrement</button>
-          <button onClick={handleReset}>Reset</button>
-          {state}
-        </div>
+        <Person 
+          name="Ghuncha"
+          email="g@test.com"
+          age={28}
+          isMarried = {true}
+          friends={["Jessica", "Jake", "Jane"]}
+          />
       </div>
     </>
   );
+}
+
+Person.propTypes = {
+  name: PropTypes.string,
+  email: PropTypes.string,
+  age: PropTypes.number,
+  isMarried: PropTypes.bool,
+  friends: PropTypes.arrayOf(PropTypes.string)
 }
 
 export default App;
